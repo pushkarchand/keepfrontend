@@ -1,0 +1,7 @@
+<div class="imageHolder">
+    <img [src]="image.url" *ngIf="image.url!==''" alt="{{image.name}}"/>
+    <div class='file-input' *ngIf="image.url===''">
+        <input type='file' (change)="handleFileInput($event.target.files)" accept="image/x-png,image/gif,image/jpeg">
+        <span class='btn btn-outline-primary btn-sm'>Choose</span>
+    </div>
+</div>

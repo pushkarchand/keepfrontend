@@ -1,0 +1,59 @@
+<div class="main">
+    <div class="main_header">
+        <div class="main_header_search">
+            <div class="input-group">
+                <input type="text" class="form-control" [(ngModel)]="storeName" placeholder="name">
+                <div class="input-group-btn">
+                    <button class="btn btn-outline-primary">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+              </div>
+        </div>
+        <div class="main_header_actions">
+          <i class="fa fa-plus main_header_actions_add" aria-hidden="true" title="Click to add New Store" (click)="openStoreForm()"></i>
+        </div>
+    </div>
+    <div class="main_body">
+        <div class="main_body_item" *ngFor="let store of listOfStores|storeNamefilter:storeName">
+                <div class="store-card">
+                    <!-- <div class="store-card_checkbox">
+                        <label class="checkboxcontainer">
+                            <input type="checkbox" value="false" (change)="addStoreToDeleteList($event,store.id)">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div> -->
+                    <div class="store-tumb" (click)="getStoreDetails(store._id)">
+                       {{store.name}}
+                    </div>
+                    <div class="store-details">
+                            <a (click)="deleteStore(store._id)"><i class="fa fa-trash-o"  aria-hidden="true"></i></a>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+
+
+<ng-template #storemodal let-modal>
+    <div class="modal-header">
+            <h4 class="modal-title">Store</h4>
+            <button type="button" class="closeBtn close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+            </button>
+    </div>
+    <div class="modal-body">
+            <form [formGroup]="storeForm" (ngSubmit)="addNewStore()">
+                <div class="productformcontainer">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+                        <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                            <div *ngIf="f.name.errors.required">Name is required</div>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary" [disabled]="storeForm.invalid">Submit</button>
+            </form>
+    </div>
+    </ng-template>

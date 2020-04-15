@@ -1,0 +1,13 @@
+.textHolder{
+    width: 100%;
+    min-height: 300px;
+    height: 300px;
+    box-shadow: -1px 2px 24px 0 rgba(0,0,0,0.3);
+    padding: 35px 20px;
+    &__editor{
+        min-height: 160px;
+        min-width: 100%;
+        border:1px solid #c2c2c2;
+    }
+    
+}

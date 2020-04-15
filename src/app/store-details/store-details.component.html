@@ -1,0 +1,36 @@
+<div class="storeconatiner">
+    <ng-container *ngIf="storeDetails">
+        <div class="storeconatiner__header">
+            <input class="form-control storeconatiner__header__input" [(ngModel)]="storeDetails.name">
+            <div class="btn-group mr-3">
+                <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+                  <button class="btn btn-outline-primary" ngbDropdownToggle>
+                      <i class="fa fa-plus" aria-hidden="true"></i></button>
+                  <div class="dropdown-menu" ngbDropdownMenu>
+                    <button ngbDropdownItem *ngFor="let document of documentType|keyvalue;" (click)="addNewItem(document.value)">{{document.value}}</button>
+                  </div>
+                </div>
+                <button class="btn btn-outline-primary btn-sm" (click)="updateStore()">save</button>
+            </div>
+        </div>
+       <div class="storeconatiner__itemlist">
+            <div class="storeconatiner__itemlist__item col-sm-4" *ngFor="let item of storeDetails.items;let i=index" [ngSwitch]="item.itemType">
+                    <div class="storeconatiner__itemlist__item__action" (click)="deleteItem(i)">
+                        <i class="fa fa-times"></i>
+                    </div>
+                    <div *ngSwitchCase="'IMAGE'">
+                        <app-image-item [image]="item.data"></app-image-item>
+                    </div>
+                    <div *ngSwitchCase="'LOACTION'">
+                            <app-location-item [location]="item.data"></app-location-item>
+                    </div>
+                    <div *ngSwitchCase="'LINK'">
+                            <app-link-item [link]="item.data"></app-link-item>
+                    </div>
+                    <div *ngSwitchCase="'TEXT'">
+                        <app-text-item [text]="item.data"></app-text-item>
+                    </div>
+            </div>
+        </div>
+    </ng-container>
+</div>
